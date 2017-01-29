@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, sans-serif;
+    height: 100%;
+    margin: 0;
+   	padding: 0;
+}
+
+/*.container {
+    height: 100%;
+    position: relative;
+}*/
+
+.search {
+    width: 14%;
+}
+
+h2 {
+    font-size: 22px;
+    margin: 10px 0 3px 5px;
+    text-align: left;
+}
+
+#map {
+    bottom: 0px;
+    height: 100%;
+    left: 15%;
+    position: absolute;
+    right: 0px;
+  	top: 0px;
+}
+
+#pac-input {
+    width: 89%;
+    margin-left: 5px;
+    border: 1px solid grey;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 14px;
+    margin: 10px 0 3px 2px;
+    text-align: left;
+}
+
+ul {
+    font-size: 11pt;
+    margin-bottom: 10px;
+}
+
+/*@media screen and (max-width: 1670px) {
+    h3 {
+        font-size: 10pt;
+    }
+}
+
+@media screen and (max-width: 1589px) {
+    h3 {
+        font-size: 9pt;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    h2 {
+        font-size: 10pt;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    h2 {
+        margin-left: 5px;
+    }
+    #pac-input {
+        width: 50px;
+        margin-left: 5px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    h2 {
+        font-size: 8pt;
+    }
+    #pac-input {
+        width: 44px;
+        margin-left: 4px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    h2 {
+        font-size: 7pt;
+    }
+    #pac-input {
+        width: 36px;
+    }
+}*/
