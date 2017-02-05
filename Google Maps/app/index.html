@@ -16,13 +16,14 @@
 			</div>
 			<hr>
 			<div class="hotspots">
-				<ul data-bind="foreach: defaultLocations">
+				<ul id="results"></ul>
+				<!-- <ul data-bind="foreach: defaultLocations">
 					<li class="list_element location" data-bind="text: title, click: $parent.showInfo, visible: show"></li>
-				</ul>
+				</ul> -->
 
-				<h3>Favorite Wilmington, NC Restaurants</h3>
-
-				<ul class="restaurants">
+<!-- 				<h3>Favorite Wilmington, NC Restaurants</h3>
+ -->
+				<!-- <ul class="restaurants">
 					<li>Copper Penny</li>
 					<li>Front Street Brewery</li>
 					<li>Havanna's</li>
@@ -31,14 +32,14 @@
 					<li>Las Olas</li>
 					<li>Okami Japanese Steakhouse</li>
 
-				</ul>
+				</ul> -->
 
 			</div> 
 
 			<div id="map"></div>
 		</div>
 
-		<script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBBm40aIp8sWMP6uQviU7sUejki2GXiwVc&v=3&callback=initMap"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBBm40aIp8sWMP6uQviU7sUejki2GXiwVc&v=3&callback=initMap" async defer></script>
 
 		<script type="text/javascript" src="/assets/bundle.js"></script>
 
