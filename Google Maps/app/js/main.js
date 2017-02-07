@@ -20,7 +20,7 @@ var styles = require('./styles').styles
         });
 
         // GEOLOCATION:
-        
+
         var infoWindow = new google.maps.InfoWindow({map: map});
         if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
@@ -60,6 +60,7 @@ var styles = require('./styles').styles
 
         var marker = new google.maps.Marker({
           map: map,
+          animation: google.maps.Animation.DROP,
           anchorPoint: new google.maps.Point(0, -29)
         });
 
@@ -97,6 +98,7 @@ var styles = require('./styles').styles
 
       }
     window.initMap = initMap
+
         //model
       //   var Location = function(data) {
       //     var self = this;
