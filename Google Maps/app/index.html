@@ -15,27 +15,11 @@
 				<input id="pac-input" class="controls" type="text" placeholder="Enter Place or Address">
 			</div>
 			<hr>
-			<div class="hotspots">
-				<ul id="results"></ul>
-				<!-- <ul data-bind="foreach: defaultLocations">
-					<li class="list_element location" data-bind="text: title, click: $parent.showInfo, visible: show"></li>
-				</ul> -->
-
-<!-- 				<h3>Favorite Wilmington, NC Restaurants</h3>
- -->
-				<!-- <ul class="restaurants">
-					<li>Copper Penny</li>
-					<li>Front Street Brewery</li>
-					<li>Havanna's</li>
-					<li>K38</li>
-					<li>Tower 7</li>
-					<li>Las Olas</li>
-					<li>Okami Japanese Steakhouse</li>
-
-				</ul> -->
-
-			</div> 
-
+			<div id="infowindow-content">
+				<img src="" width="16" height="16" id="place-icon">
+				<span id="place-name" class="title"></span><br>
+				<span id="place-address"></span>
+			</div>
 			<div id="map"></div>
 		</div>
 
