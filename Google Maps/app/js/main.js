@@ -7,14 +7,15 @@ var styles = require('./styles').styles
       var map;
       var markers = [];
       var infowindow;
+      var service;
 
-      //var wilm = { lat: 34.2257, lng: -77.9447 };
+      var wilm = { lat: 34.2257, lng: -77.9447 };
 
       function initMap() {
 
         map = new google.maps.Map(document.getElementById('map'), {
           //center: wilm, //{lat: 34.2257, lng: -77.9447},
-          zoom: 11,
+          zoom: 14,
           styles: styles,
           mapTypeConrtol: false
         });
@@ -39,7 +40,7 @@ var styles = require('./styles').styles
           handleLocationError(false, infoWindow, map.getCenter());
         }
 
-        function handleLocationErro(browserHasGeolocation, infoWindow, pos) {
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
           infoWindow.setPosition(pos);
           infoWindow.setContent(browserHasGeolocation ?
             'Error: The Geolocation service failed.' :
@@ -95,6 +96,38 @@ var styles = require('./styles').styles
           infowindowContent.children['place-address'].textContent = address;
           infowindow.open(map, marker);
         });
+
+        // APPEND NEARBY RESTAURANTS:
+        
+        var service = new google.maps.places.PlacesService(map);
+        service.nearbySearch({
+          location: LatLng,
+          radius: 500,
+          types: ['food', 'bar', 'restaurant', 'cafe']
+        }, callback);
+
+        function callback(results, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            for (var i = 0; i < results.length; i++) {
+              var place = results[i];
+              createMarker(results[i]);
+            }
+          }
+        }
+
+        function createMarker(place) {
+          var placeLoc = place.geometry.location;
+          var marker = new google.maps.Marker({
+            map: map,
+            position: place.geometry.location
+          });
+
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent(place.name);
+            infowindow.open(map, this);
+          });
+        }
+
 
       }
     window.initMap = initMap
