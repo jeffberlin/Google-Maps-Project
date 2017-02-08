@@ -4,10 +4,13 @@ body {
     margin: 0;
    	padding: 0;
     font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+    /*background-color: #EDEDED;*/
 }
 
 .search {
     width: 14%;
+    padding-bottom: 15px;
+    border-bottom: 1.5px solid #DDDDDE;
 }
 
 h2 {
@@ -15,6 +18,7 @@ h2 {
     margin: 10px 0 3px 5px;
     text-align: left;
     letter-spacing: .75px;
+    color: #4E4F4F;
 }
 
 #map {
@@ -24,6 +28,7 @@ h2 {
     position: absolute;
     right: 0px;
   	top: 0px;
+    border-left: 1px solid #B0B7BD;
 }
 
 #pac-input {
