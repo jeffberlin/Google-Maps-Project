@@ -2,7 +2,13 @@ require('knockout')
 
 var styles = require('./styles').styles
 
- //function AppViewModel() {
+function AppViewModel() {
+        var viewModel = {
+          header: ko.observable()
+        }
+        viewModel.header("Search For Location");
+        ko.applyBindings(viewModel)
+      }
 
       var map;
       var markers = [];
@@ -11,13 +17,15 @@ var styles = require('./styles').styles
 
       var wilm = { lat: 34.2257, lng: -77.9447 };
 
+      
+
       function initMap() {
 
         map = new google.maps.Map(document.getElementById('map'), {
           //center: wilm, {lat: 34.2257, lng: -77.9447},
           zoom: 14,
           styles: styles,
-          //mapTypeConrtol: false
+          mapTypeConrtol: false
         });
 
         // GEOLOCATION:
@@ -92,7 +100,6 @@ var styles = require('./styles').styles
         infowindow.setContent(infowindowContent);
 
 
-
         autocomplete.addListener('place_changed', function() {
           infowindow.close();
           marker.setVisible(false);
@@ -153,4 +160,3 @@ var styles = require('./styles').styles
       
 
 //view model
-        
