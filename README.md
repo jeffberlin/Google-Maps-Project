@@ -4,3 +4,4 @@
 * Open up the terminal and cd to the file
 * Add: npm install
 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js inside the terminal for the file.
+* Open the browser with localhost: for the app/index.html file
