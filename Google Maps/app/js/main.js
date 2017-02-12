@@ -1,23 +1,18 @@
-require('knockout')
+var ko = require("knockout")
 
 var styles = require('./styles').styles
 
-function AppViewModel() {
-        var viewModel = {
-          header: ko.observable()
-        }
-        viewModel.header("Search For Location");
-        ko.applyBindings(viewModel)
+    function AppViewModel() {
+          this.header = ko.observable("Search For Location");
       }
-
+      ko.applyBindings(new AppViewModel());
+      
       var map;
       var markers = [];
       var infowindow;
       var service;
 
-      var wilm = { lat: 34.2257, lng: -77.9447 };
-
-      
+      var wilm = { lat: 34.2257, lng: -77.9447 };   
 
       function initMap() {
 
@@ -29,6 +24,8 @@ function AppViewModel() {
         });
 
         // GEOLOCATION:
+
+        var largeInfowindow = new google.maps.InfoWindow();
 
         var infoWindow = new google.maps.InfoWindow({map: map});
         if (navigator.geolocation) {
@@ -55,7 +52,8 @@ function AppViewModel() {
             'Error: Please enable Google to access your location.');
         }
 
-        // APPEND NEARBY Night Clubs and Bars (5 mile radius):
+        // APPEND NEARBY Night Clubs, restaurants, and Bars:
+        
         
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
@@ -81,9 +79,10 @@ function AppViewModel() {
             position: place.geometry.location
           });
 
-          google.maps.event.addListener(marker, 'click', function() {
+          marker.addListener(marker, 'click', function() {
             infowindow.setContent(place.name);
             infowindow.open(map, this);
+            populateInfoWindow(this, largeInfowindow);
           });
         }
 
@@ -145,6 +144,11 @@ function AppViewModel() {
           animation: google.maps.Animation.DROP,
           anchorPoint: new google.maps.Point(0, -29)
         });
+        
+
+        // STREETVIEW:
+
+        
 
       }
     window.initMap = initMap
