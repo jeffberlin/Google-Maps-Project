@@ -54,7 +54,6 @@ var styles = require('./styles').styles
 
         // APPEND NEARBY Night Clubs, restaurants, and Bars:
         
-        
         var service = new google.maps.places.PlacesService(map);
         service.nearbySearch({
           location: wilm, // <-- NEED SOMETHING FOR LOCATION

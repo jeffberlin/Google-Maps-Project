@@ -12,7 +12,7 @@ module.exports = {
         elementType: 'labels.text.stroke',
         stylers: [
           { color: '#ffffff'},
-          { weight: 5 }
+          { weight: 6 }
         ]
       },
       {
