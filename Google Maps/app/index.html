@@ -1,30 +1,46 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Neighborhood Map</title>
-		<link rel="stylesheet" href="css/style.css">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Neighborhood Map</title>
+        <link rel="stylesheet" href="css/style.css">
 
-	</head>
+    </head>
 
-	<body>
-		<div class="container">
-			<div class="search">
-				<h2 data-bind="text: header"></h2>
-				<input id="pac-input" class="controls" type="text" placeholder="Enter Place or Address">
-			</div>
-			<div id="infowindow-content">
-				<img src="" width="16" height="16" id="place-icon">
-				<span id="place-name" class="title"></span><br>
-				<span id="place-address"></span>
-			</div>
-			<div id="map"></div>
-		</div>
+    <body>
+        <div class="container">
+            <div class="search">
+                <h1 data-bind="text: header"></h1>
+                <input id="pac-input" class="controls" type="text" placeholder="Enter Place or Address">
+            </div>
 
-		<script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBBm40aIp8sWMP6uQviU7sUejki2GXiwVc&v=3&callback=initMap" async defer></script>
+            <div>
+                <h3 data-bind="text: parks"></h3>
+                <input id="hide-parks" type="button" value="Hide">
+                <input id="show-parks" type="button" value="Show">
 
-		<script type="text/javascript" src="/assets/bundle.js"></script>
+                <ul>
+                    <li>Robert Strange Park</li>
+                    <li>Claude Howell Park</li>
+                    <li>Portia Hines Park</li>
+                    <li>Hugh McRae Park</li>
+                    <li>Greenfield Park</li>
+                </ul>
 
-	</body>
+            </div>
+
+            <div id="infowindow-content">
+                <img src="" width="16" height="16" id="place-icon">
+                <span id="place-name" class="title"></span><br>
+                <span id="place-address"></span>
+            </div>
+            <div id="map"></div>
+        </div>
+
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places,geometry&key=AIzaSyBBm40aIp8sWMP6uQviU7sUejki2GXiwVc&v=3&callback=initMap" async defer></script>
+
+        <script type="text/javascript" src="/assets/bundle.js"></script>
+
+    </body>
 </html>
