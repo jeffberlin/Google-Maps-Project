@@ -5,12 +5,10 @@ var styles = require('./styles').styles
    function AppViewModel() {
          this.header = ko.observable("Search For Location");
          this.parks = ko.observable("Local Parks:");
-         var list = function() {
-           this.title = ko.observable(parks[i].title);
-         };
 
      }
      ko.applyBindings(new AppViewModel());
+
      var map;
      var markers = [];
      var infowindow;
@@ -29,7 +27,10 @@ var styles = require('./styles').styles
          {title: 'Claude Howell Park', location: {lat: 34.232732, lng: -77.949375}},
          {title: 'Portia Hines Park', location: {lat: 34.240406, lng: -77.936905}},
          {title: 'Hugh McRae Park', location: {lat: 34.208258, lng: -77.879051}},
-         {title: 'Greenfield Park', location: {lat: 34.214281, lng: -77.944126}}
+         {title: 'Greenfield Park', location: {lat: 34.214281, lng: -77.944126}},
+         {title: 'Empire Park', location: {lat: 34.220848, lng: -77.902875}},
+         {title: 'Maides Park', location: {lat: 34.249825, lng: -77.901473}},
+         {title: 'Story Park', location: {lat: 34.238018, lng: -77.946599}}
        ];
 
        var infowindow = new google.maps.InfoWindow();
