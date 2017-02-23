@@ -6,6 +6,27 @@ var styles = require('./styles').styles
          this.header = ko.observable("Search For Location");
          this.listTitle = ko.observable("Local Coffee Shops:");
 
+         var self = this;
+         self.shops = ko.observableArray([
+          'Port City Java',
+          'Starbucks',
+          '24 South Coffee House',
+          'Karen\'s Cafe',
+          'Folks on Fourth',
+          'Folks Cafe',
+          'Luna Cafè',
+          'Zola Coffee & Tea',
+          'Grinders Caffè',
+          'Daily Grind',
+          'Addicted to the Bean',
+          'Bitty & Beau\'s Coffee',
+          'Lucky Joe Craft Coffee',
+          'Java Dog Coffee House',
+          'Morning Glory Coffeehouse',
+          'Bespoke Coffee & Dry Goods',
+          'Brick + Mortar Coffee and Supply'
+          ])
+
      }
      ko.applyBindings(new AppViewModel());
 
@@ -41,7 +62,6 @@ var styles = require('./styles').styles
          {title: 'Folks Cafe', location: {lat: 34.237704, lng: -77.934188}},
          {title: 'Luna Caffè', location: {lat: 34.228263, lng: -77.940812}},
          {title: 'Morning Glory Coffeehouse', location: {lat: 34.225831, lng: -77.929120}},
-         
          {title: 'Zola Coffee & Tea', location: {lat: 34.213228, lng: -77.887951}},
          {title: 'Addicted to the Bean', location: {lat: 34.213678, lng: -77.886954}},
          {title: 'Grinders Caffè', location: {lat: 34.212560, lng: -77.871677}},
