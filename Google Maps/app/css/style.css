@@ -48,7 +48,7 @@ h3 {
    padding-bottom: 5px;
 }
 
-#hide-parks, #show-parks {
+#hide-shops, #show-shops {
  width: 80px;
  height: 25px;
  margin-left: 5px;
@@ -59,12 +59,12 @@ h3 {
  outline: none;
 }
 
-#hide-parks:hover, #show-parks:hover {
+#hide-shops:hover, #show-shops:hover {
  cursor: pointer;
  background-color: #D1D0D0 ;
 }
 
-#hide-parks:active, #show-parks:active {
+#hide-shops:active, #show-shops:active {
  transform: translateY(1.5px);
 }
 
