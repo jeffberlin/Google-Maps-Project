@@ -29,6 +29,9 @@ var styles = require('./styles').styles
          {title: 'Port City Java', location: {lat: 34.201974, lng: -77.922590}},
          {title: 'Port City Java', location: {lat: 34.242096, lng: -77.863673}},
          {title: 'Port City Java', location: {lat: 34.194293, lng: -77.910822}},
+         {title: 'Starbucks', location: {lat: 34.216803, lng: -77.906956}},
+         {title: 'Starbucks', location: {lat: 34.242066, lng: -77.828570}},
+         {title: 'Starbucks', location: {lat: 34.196443, lng: -77.890236}},
          {title: 'Bespke Coffee & Dry Goods', location: {lat: 34.236453, lng: -77.947403}},
          {title: '24 South Coffee House', location: {lat: 34.234496, lng: -77.948725}},
          {title: 'Karen\'s Cafe', location: {lat: 34.238730, lng: -77.948981}},
@@ -38,16 +41,13 @@ var styles = require('./styles').styles
          {title: 'Folks Cafe', location: {lat: 34.237704, lng: -77.934188}},
          {title: 'Luna Caffè', location: {lat: 34.228263, lng: -77.940812}},
          {title: 'Morning Glory Coffeehouse', location: {lat: 34.225831, lng: -77.929120}},
-         {title: 'Starbucks', location: {lat: 34.216803, lng: -77.906956}},
-         {title: 'Starbucks', location: {lat: 34.242066, lng: -77.828570}},
-         {title: 'Starbucks', location: {lat: 34.196443, lng: -77.890236}},
+         
          {title: 'Zola Coffee & Tea', location: {lat: 34.213228, lng: -77.887951}},
          {title: 'Addicted to the Bean', location: {lat: 34.213678, lng: -77.886954}},
          {title: 'Grinders Caffè', location: {lat: 34.212560, lng: -77.871677}},
          {title: 'Daily Grind', location: {lat: 34.241911, lng: -77.867955}},
          {title: 'Bitty & Beau\'s Coffee', location: {lat: 34.242041, lng: -77.877485}},
          {title: 'Lucky Joe Craft Coffee', location: {lat: 34.266057, lng: -77.837758}}
-         
        ];
 
        var infowindow = new google.maps.InfoWindow();
