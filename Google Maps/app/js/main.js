@@ -4,7 +4,7 @@ var styles = require('./styles').styles
 
    function AppViewModel() {
          this.header = ko.observable("Search For Location");
-         this.listTitle = ko.observable("Local Coffee Shops:");
+         this.local = ko.observable("Local Coffee Shops:");
 
          var self = this;
          self.shops = ko.observableArray([
@@ -12,9 +12,9 @@ var styles = require('./styles').styles
           'Starbucks',
           '24 South Coffee House',
           'Karen\'s Cafe',
+          'Luna Caffè',
           'Folks on Fourth',
           'Folks Cafe',
-          'Luna Cafè',
           'Zola Coffee & Tea',
           'Grinders Caffè',
           'Daily Grind',
@@ -25,7 +25,10 @@ var styles = require('./styles').styles
           'Morning Glory Coffeehouse',
           'Bespoke Coffee & Dry Goods',
           'Brick + Mortar Coffee and Supply'
-          ])
+          ]);
+         self.showPlace = function() {
+          self.shops.infowindow.open(map, marker)
+         }
 
      }
      ko.applyBindings(new AppViewModel());
@@ -204,15 +207,3 @@ var styles = require('./styles').styles
 
      }
    window.initMap = initMap
-
-       //model
-     //   var Location = function(data) {
-     //     var self = this;
-     //     self.title = data.title;
-     //     self.location = data.location;
-     //     self.id = data.id;
-     //     self.show = ko.observable(true);
-     //   };
-
-
-//view model

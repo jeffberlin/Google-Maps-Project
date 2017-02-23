@@ -16,13 +16,13 @@
             </div>
 
             <div>
-                <h3 data-bind="text: listTitle"></h3>
+                <h3 data-bind="text: local"></h3>
                 <input id="hide-shops" type="button" value="Hide">
                 <input id="show-shops" type="button" value="Show">
 
                 <ul data-bind="foreach: shops">
                 	<li>
-                		<span data-bind="text: $data"></span>
+                		<span data-bind="text: $data" data-bind="click: $parent.showPlace"></span>
                 	</li>
                 </ul>
 
