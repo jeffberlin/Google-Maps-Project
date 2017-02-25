@@ -26,16 +26,8 @@ var styles = require('./styles').styles
           'Bespoke Coffee & Dry Goods',
           'Brick + Mortar Coffee and Supply'
           ]);
-         self.search = ko.computed(function() {
-          return searchResult = ko.utils.arrayFilter(self.locationList(), function(item) {
-            var title = item.shops.toLowerCase();
-            return userInputIsInTitle = title.indexOf(userInput) >= 0;
-            if (item.marker) {
-              item.marker.setVisible(userInputIsInTitle);
-            }
-            return userInputIsInTitle;
-          });
-         })
+         self.search = 
+          
 
        //   self.hideMarkers = function(shops) {
        //   for (var i = 0; i < markers.length; i++) {
