@@ -75,6 +75,9 @@ li {
  color: #656565 ;
  opacity: .7;
 }
+li span:hover {
+   cursor: pointer;
+}
 
 #infowindow-content .title {
    font-weight: bold;

@@ -22,7 +22,7 @@
 
                 <ul data-bind="foreach: shops">
                 	<li>
-                		<span data-bind="text: $data" data-bind="click: $parent.showPlace"></span>
+                		<span data-bind="text: $data, click: $root.showMarkers"></span>
                 	</li>
                 </ul>
 

@@ -26,9 +26,31 @@ var styles = require('./styles').styles
           'Bespoke Coffee & Dry Goods',
           'Brick + Mortar Coffee and Supply'
           ]);
-         self.showPlace = function() {
-          self.shops.infowindow.open(map, marker)
-         }
+         self.search = ko.computed(function() {
+          return searchResult = ko.utils.arrayFilter(self.locationList(), function(item) {
+            var title = item.shops.toLowerCase();
+            return userInputIsInTitle = title.indexOf(userInput) >= 0;
+            if (item.marker) {
+              item.marker.setVisible(userInputIsInTitle);
+            }
+            return userInputIsInTitle;
+          });
+         })
+
+       //   self.hideMarkers = function(shops) {
+       //   for (var i = 0; i < markers.length; i++) {
+       //     markers[i].setMap(null);
+       //   }
+       // }
+
+       // function showMarkers() {
+       //   var bounds = new google.maps.LatLngBounds();
+       //   for (var i = 0; i < markers.length; i++) {
+       //     markers[i].setMap(map);
+       //     bounds.extend(markers[i].position);
+       //   }
+       //   map.fitBounds(bounds);
+       // }
 
      }
      ko.applyBindings(new AppViewModel());
