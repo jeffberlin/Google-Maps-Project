@@ -9,7 +9,7 @@ body {
 
 .search {
    width: 14%;
-   padding-bottom: 15px;
+   padding-bottom: 1px;
    border-bottom: 1px solid #DDDDDE ;
 }
 
@@ -39,35 +39,6 @@ h1 {
    margin-bottom: 10px;
 }
 
-h3 {
-   font-size: 17px;
-   color: #4E4F4F ;
-   margin: 10px 0 10px 5px;
-   text-align: left;
-   letter-spacing: .50px;
-   padding-bottom: 5px;
-}
-
-#hide-shops, #show-shops {
- width: 80px;
- height: 25px;
- margin-left: 5px;
- background-color: #EDEDED ;
- border-radius: 5px;
- border: .2px solid grey;
- font-size: 9pt;
- outline: none;
-}
-
-#hide-shops:hover, #show-shops:hover {
- cursor: pointer;
- background-color: #D1D0D0 ;
-}
-
-#hide-shops:active, #show-shops:active {
- transform: translateY(1.5px);
-}
-
 li {
  padding-top: 5px;
  margin-left: -35px;
@@ -75,6 +46,7 @@ li {
  color: #656565 ;
  opacity: .7;
 }
+
 li span:hover {
    cursor: pointer;
 }
