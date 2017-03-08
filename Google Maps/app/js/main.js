@@ -7,7 +7,7 @@ var styles = require('./styles').styles
 
       // List of coffee shops to select
       var self = this;
-         self.shops = ko.observableArray([
+        self.shops = ko.observableArray([
           { title: 'Port City Java' },
           { title: 'Starbucks' },
           { title: 'Folks on Fourth' },
@@ -77,6 +77,13 @@ var markers = [];
           id: i
         })
         markers.push(marker)
+       }
+
+       var listClickViewModel = function() {
+        var self = this;
+          self.shopMarker = function() {
+            self.title
+          }
        }
 
 
