@@ -32,15 +32,14 @@ var styles = require('./styles').styles
         {title: 'Morning Glory Coffeehouse', location: {lat: 34.225831, lng: -77.929120}},
         {title: 'Bespoke Coffee & Dry Goods', location: {lat: 34.236453, lng: -77.947403}},
         {title: 'Brick + Mortar Coffee and Supply', location: {lat: 34.247251, lng: -77.946280}}
-      ]);
-
-      
+      ]); 
 
       this.google = ko.observable(false);
       this.createMarkers = ko.computed(function(){
         if (self.google()){
           console.log("Google maps has finished loading");
           for (var i = 0; i < self.shops().length; i++) {
+            var infowindow = new google.maps.InfoWindow();
             var position = self.shops()[i].location;
             var title = self.shops()[i].title;
             var marker = new google.maps.Marker({
@@ -51,14 +50,20 @@ var styles = require('./styles').styles
               id: i
             })
             self.shops()[i].marker = marker;
-            markers.push(marker)
+            markers.push(marker);
+            marker.addListener('click', function() {
+              infowindow.setContent(this.title);
+              infowindow.open(map, this);
+            });
            }
            console.log(self.shops());
         }
       });
-        
+      
+    
 var map;
 var markers = [];
+var infowindow = [];
 
     function initMap() {
 
@@ -67,18 +72,16 @@ var markers = [];
          zoom: 13,
          styles: styles,
          mapTypeConrtol: false
-       });  
+       });
 
        appViewModel.google(true);
 
-       
-
-       var listClickViewModel = function() {
-        var self = this;
-          self.shopMarker = function() {
-            //self.shops.title
-          }
-       }
+       // var listClickViewModel = function() {
+       //  var self = this;
+       //    self.shopMarker = function() {
+       //      //self.shops.title
+       //    }
+       // }
 
 
 
