@@ -49,24 +49,6 @@ li span:hover {
    cursor: pointer;
 }
 
-#infowindow-content .title {
-   font-weight: bold;
-   letter-spacing: .75px;
-}
-
-#infowindow-content {
-   display: none;
-}
-
-#map #infowindow-content {
-   display: inline;
-}
-
-#pano {
-   width: 20px;
-   height: 20px;
-}
-
 /*@media screen and (max-width: 1670px) {
    h3 {
        font-size: 10pt;
