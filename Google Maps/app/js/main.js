@@ -102,6 +102,7 @@ var styles = require('./styles').styles
         }
       ]); 
 
+      // Appends the markers to the map with working infowindow
       this.google = ko.observable(false);
       this.google.subscribe(function(isLoadingFinished) {
         if (isLoadingFinished) {
@@ -127,6 +128,7 @@ var styles = require('./styles').styles
           console.log(self.shops());
         }
       });
+
     
 var map;
 var markers = [];
