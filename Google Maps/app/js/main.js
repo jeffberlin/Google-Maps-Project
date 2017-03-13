@@ -126,7 +126,7 @@ var styles = require('./styles').styles
           }
           console.log(self.shops());
         }
-      }) 
+      });
     
 var map;
 var markers = [];
