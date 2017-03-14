@@ -255,6 +255,7 @@ function AppViewModel() {
   });
 
   this.search = ko.observable("");
+  shop.marker = marker;
 
   this.searchFunction = ko.computed(function() {
     var filterInput = self.search().toLowerCase();
@@ -264,17 +265,18 @@ function AppViewModel() {
         // show the location
         shop.showListing(true);
         // show the location's markers
-
+          shop.marker.setVisible(true);
       } else {
         // hide the location
         shop.showListing(false);
         // hide the location's markers
-
+        
       }
     });
   });
 
   this.listItemClick = function(location) {
+    self.shops().marker.setAnimation(google.maps.Animation.BOUNCE);
     console.log(location);
   }
 
