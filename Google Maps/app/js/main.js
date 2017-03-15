@@ -278,12 +278,14 @@ function AppViewModel() {
     console.log(location);
   }
 
+  //Reset button
   document.getElementById('reset').addEventListener('click', resetMap);
 
   function resetMap() {
     location.reload();
   }
 
+  
 
   var map;
   var bounds;
@@ -306,6 +308,14 @@ function AppViewModel() {
 
     appViewModel.google(true);
 
+    var largeInfowindow = new google.maps.InfoWindow();
+
+    //Keep the map centered on window resizing
+    google.maps.event.addDomListener(window, "resize", function() {
+      var center = map.getCenter();
+      google.maps.event.trigger(map, "resize");
+      map.setCenter(center);
+    });
 
 
   }
