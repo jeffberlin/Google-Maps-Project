@@ -268,15 +268,9 @@ function AppViewModel() {
         // hide the location
         shop.showListing(false);
         // hide the location's markers
-        
       }
     });
   });
-
-  this.listItemClick = function(location) {
-    
-    console.log(location);
-  }
 
   //Reset button
   document.getElementById('reset').addEventListener('click', resetMap);
@@ -316,6 +310,13 @@ function AppViewModel() {
       google.maps.event.trigger(map, "resize");
       map.setCenter(center);
     });
+
+    //Populate the infowindow with yelp info
+    this.listItemClick = function(place) {
+      var marker = location.marker;
+      google.maps.event.trigger(marker, 'click');
+      console.log(place);
+    };
 
 
   }
