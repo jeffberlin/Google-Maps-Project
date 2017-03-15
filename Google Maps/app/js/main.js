@@ -244,10 +244,12 @@ function AppViewModel() {
           location.marker = marker;
           bounds.extend(marker.position);
           marker.addListener('click', function() {
+            toggleBounce(marker);
             //Centers the map to the clicked marker
             window.setTimeout(function() {
               map.panTo(marker.getPosition());
             });
+
             infowindow.setContent(this.title);
             infowindow.open(map, this);
           })
