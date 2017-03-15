@@ -255,7 +255,6 @@ function AppViewModel() {
   });
 
   this.search = ko.observable("");
-  shop.marker = marker;
 
   this.searchFunction = ko.computed(function() {
     var filterInput = self.search().toLowerCase();
@@ -265,7 +264,6 @@ function AppViewModel() {
         // show the location
         shop.showListing(true);
         // show the location's markers
-          shop.marker.setVisible(true);
       } else {
         // hide the location
         shop.showListing(false);
