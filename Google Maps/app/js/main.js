@@ -278,14 +278,10 @@ function AppViewModel() {
     console.log(location);
   }
 
-  document.getElementById('reset').addEventListener('click', resetMarkers);
+  document.getElementById('reset').addEventListener('click', resetMap);
 
-  function resetMarkers() {
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
-      bounds.extend(markers[i].position);
-    }
-    map.fitBounds(bounds);
+  function resetMap() {
+    location.reload();
   }
 
 

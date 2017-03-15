@@ -6,6 +6,12 @@ body {
    font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
 }
 
+.container {
+  width: 250px;
+  height: auto;
+  text-align: center;
+}
+
 .search {
    width: 14%;
    padding-bottom: 1px;
@@ -31,8 +37,8 @@ h1 {
 }
 
 #pac-input {
-   width: 13%;
-   margin-left: 4.5px;
+   width: 95%;
+   /*margin-left: 4.5px;*/
    border: 1px solid grey;
    margin-right: 5px;
 }
@@ -40,7 +46,7 @@ h1 {
 #reset {
   width: 70px;
   background-color: #DDDDDE;
-  margin-left: 5px;
+  /*margin-left: 5px*/;
   border: none;
   border-radius: 3px;
   outline: none;
@@ -53,7 +59,7 @@ h1 {
 }
 
 #reset:active {
-
+  transform: translateY(2px);
 }
 
 li {
@@ -62,6 +68,7 @@ li {
  list-style: none;
  color: #656565 ;
  opacity: .7;
+ text-align: left;
 }
 
 li span:hover {
