@@ -17,6 +17,8 @@
             <div>
                 <p><input id="pac-input" type="search" placeholder="Enter Name" data-bind="textInput: search"></p>
 
+                <input id="reset" type="button" value="Reset">
+
                 <ul data-bind="foreach: shops">
                 	<li data-bind="visible: showListing, click: $root.listItemClick">
                         <span data-bind="text: $data.title"></span>

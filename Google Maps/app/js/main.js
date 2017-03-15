@@ -274,8 +274,18 @@ function AppViewModel() {
   });
 
   this.listItemClick = function(location) {
-    self.shops().marker.setAnimation(google.maps.Animation.BOUNCE);
+    
     console.log(location);
+  }
+
+  document.getElementById('reset').addEventListener('click', resetMarkers);
+
+  function resetMarkers() {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+      bounds.extend(markers[i].position);
+    }
+    map.fitBounds(bounds);
   }
 
 

@@ -37,6 +37,25 @@ h1 {
    margin-right: 5px;
 }
 
+#reset {
+  width: 70px;
+  background-color: #DDDDDE;
+  margin-left: 5px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  font-size: 10pt;
+}
+
+#reset:hover {
+  cursor: pointer;
+  background-color: #9E9E9E;
+}
+
+#reset:active {
+
+}
+
 li {
  padding-top: 5px;
  margin-left: -35px;
