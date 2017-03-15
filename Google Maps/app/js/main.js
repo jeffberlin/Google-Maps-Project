@@ -244,6 +244,10 @@ function AppViewModel() {
           location.marker = marker;
           bounds.extend(marker.position);
           marker.addListener('click', function() {
+            //Centers the map to the clicked marker
+            window.setTimeout(function() {
+              map.panTo(marker.getPosition());
+            });
             infowindow.setContent(this.title);
             infowindow.open(map, this);
           })
@@ -317,6 +321,17 @@ function AppViewModel() {
       google.maps.event.trigger(marker, 'click');
       console.log(place);
     };
+
+    this.toggleBounce = function(marker) {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function() {
+          marker.setAnimation(null);
+        }, 700);
+      }
+    }
 
 
   }
