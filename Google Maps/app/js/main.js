@@ -5,7 +5,11 @@ var styles = require('./styles').styles
 function AppViewModel() {
   this.header = ko.observable("Wilmington Coffee Shops");
 
-  
+  var map,
+    largeInfowindow;
+  var bounds;
+  var markers = [];
+  var infowindow = [];
 
   // List of coffee shops to select
   var self = this;
@@ -249,48 +253,28 @@ function AppViewModel() {
             window.setTimeout(function() {
               map.panTo(marker.getPosition());
             });
-
-            infowindow.setContent(this.title);
+            populateInfoWindow(this, largeInfowindow);
             infowindow.open(map, this);
-          })
-        })
+          });
+        });
       }
       map.fitBounds(bounds);
       console.log(self.shops());
     }
   });
-
+  
   this.search = ko.observable("");
 
-  this.searchFunction = ko.computed(function() {
-    var filterInput = self.search().toLowerCase();
-
-    self.shops().forEach(function(shop) {
-      if (shop.title.toLowerCase().indexOf(filterInput) !== -1) {
-        // show the location
-        shop.showListing(true);
-        // show the location's markers
-      } else {
-        // hide the location
-        shop.showListing(false);
-        // hide the location's markers
-      }
-    });
-  });
+  //Makes the shop list names clickable
+  this.listItemClick = function(place) {
+    console.log(place);
+  };
 
   //Reset button
   document.getElementById('reset').addEventListener('click', resetMap);
-
   function resetMap() {
     location.reload();
   }
-
-  
-
-  var map;
-  var bounds;
-  var markers = [];
-  var infowindow = [];
 
   function initMap() {
 
@@ -308,8 +292,6 @@ function AppViewModel() {
 
     appViewModel.google(true);
 
-    var largeInfowindow = new google.maps.InfoWindow();
-
     //Keep the map centered on window resizing
     google.maps.event.addDomListener(window, "resize", function() {
       var center = map.getCenter();
@@ -317,13 +299,46 @@ function AppViewModel() {
       map.setCenter(center);
     });
 
-    //Populate the infowindow with yelp info
-    this.listItemClick = function(place) {
-      var marker = location.marker;
-      google.maps.event.trigger(marker, 'click');
-      console.log(place);
-    };
+    this.searchFunction = ko.computed(function() {
+      var filterInput = self.search().toLowerCase();
+      self.shops().forEach(function(shop) {
+        console.log(shop);
+        if (shop.title.toLowerCase().indexOf(filterInput) !== -1) {
+          // show the location
+          shop.showListing(true);
+          // show the location's markers
+          // if (typeof location.marker === 'object') {
+          //   location.marker.visible(match);
+          //   return match;
+          // }
+        } else {
+          // hide the location
+          shop.showListing(false);
+          // hide the location's markers
+        }
+      });
+    });
 
+    //Setting up Foursquare for infowindow
+    var CLIENT_ID = '4TGGE0PWAWXOLLGK4LWQF4C1ZO3UPPR4IIK5U24QOCG0ISIQ';
+    var CLIENT_SECRET = 'ZNHCHPVS0NEE0Q1X1LQA5PNE2ERHRMTAF04X2RCP1CAXRJTB';
+
+    //Populate the infowindow with Foursquare
+    this.populateInfoWindow = function(marker, infowindow) {
+      //var index = marker.id;
+      //var location = locations[index];
+      var phoneNumber;
+      var url = 'https://api.foursquare.com/v2/venues/' + self.shops().location + CLIENT_ID + CLIENT_SECRET + '49d51ce3f964a520675c1fe3';
+
+      $.ajax(url, function(data) {
+        phoneNumber = data.response.venues[0].contact.phone;
+        infowindow.setContent('<div>' + '<b>' + marker.title + '</b>' + '</div>')
+      }).fail(function(err) {
+        infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + 'Failed to load Foursquare.' + '</div>')
+      });
+    }
+
+    //Bounces the marker when the marker is clicked
     this.toggleBounce = function(marker) {
       if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
@@ -331,13 +346,12 @@ function AppViewModel() {
         marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function() {
           marker.setAnimation(null);
-        }, 700);
+        }, 1200);
       }
     }
 
-
   }
-  window.initMap = initMap
+  window.initMap = initMap;
 }
 var appViewModel = new AppViewModel();
 ko.applyBindings(appViewModel);
