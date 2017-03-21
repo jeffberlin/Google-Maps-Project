@@ -322,20 +322,30 @@ function AppViewModel() {
     //Setting up Foursquare for infowindow
     var CLIENT_ID = '4TGGE0PWAWXOLLGK4LWQF4C1ZO3UPPR4IIK5U24QOCG0ISIQ';
     var CLIENT_SECRET = 'ZNHCHPVS0NEE0Q1X1LQA5PNE2ERHRMTAF04X2RCP1CAXRJTB';
+    var VERSION = '&v=20170101';
 
     //Populate the infowindow with Foursquare
     this.populateInfoWindow = function(marker, infowindow) {
-      //var index = marker.id;
-      //var location = locations[index];
-      var phoneNumber;
-      var url = 'https://api.foursquare.com/v2/venues/' + self.shops().location + CLIENT_ID + CLIENT_SECRET + '49d51ce3f964a520675c1fe3';
+      var url = 'https://api.foursquare.com/v2/venues/' + CLIENT_ID + CLIENT_SECRET + VERSION;
 
-      $.ajax(url, function(data) {
-        phoneNumber = data.response.venues[0].contact.phone;
-        infowindow.setContent('<div>' + '<b>' + marker.title + '</b>' + '</div>')
-      }).fail(function(err) {
-        infowindow.setContent('<div>' + marker.title + '</div>' + '<div>' + 'Failed to load Foursquare.' + '</div>')
-      });
+      $.ajax({
+        type: "GET",
+        dataType: 'json',
+        cache: false,
+        url: url,
+        async: true,
+        success: function(data) {
+          var infoWindow = new google.maps.InfoWindow({
+            content: contentString({
+              title: '<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>',
+              address: data.response.venue.address,
+              city: data.response.venue.city + data.response.venue.state + data.response.venue.zip,
+              hours: data.response.venue.hours,
+              phone: data.response.venue.phone
+            })
+          });
+        }
+      })
     }
 
     //Bounces the marker when the marker is clicked
