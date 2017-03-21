@@ -5,12 +5,6 @@ var styles = require('./styles').styles
 function AppViewModel() {
   this.header = ko.observable("Wilmington Coffee Shops");
 
-  var map,
-    largeInfowindow;
-  var bounds;
-  var markers = [];
-  var infowindow = [];
-
   // List of coffee shops to select
   var self = this;
   self.shops = ko.observableArray([{
@@ -138,12 +132,13 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Grinders Caffè',
+      title: 'Grinders Cafè',
       locations: [{
         location: {
           lat: 34.212560,
           lng: -77.871677
-        }
+        },
+        id: '4df39287d4c01ff6b2ecac4d'
       }],
       showListing: ko.observable(true)
     },
@@ -276,6 +271,12 @@ function AppViewModel() {
     location.reload();
   }
 
+  var map,
+    largeInfowindow;
+  var bounds;
+  var markers = [];
+  var infowindow = [];
+
   function initMap() {
 
     bounds = new google.maps.LatLngBounds();
@@ -320,33 +321,42 @@ function AppViewModel() {
     });
 
     //Setting up Foursquare for infowindow
-    var CLIENT_ID = '4TGGE0PWAWXOLLGK4LWQF4C1ZO3UPPR4IIK5U24QOCG0ISIQ';
-    var CLIENT_SECRET = 'ZNHCHPVS0NEE0Q1X1LQA5PNE2ERHRMTAF04X2RCP1CAXRJTB';
+    var CLIENT_ID = '?client_id=4TGGE0PWAWXOLLGK4LWQF4C1ZO3UPPR4IIK5U24QOCG0ISIQ';
+    var CLIENT_SECRET = '$client_secret=ZNHCHPVS0NEE0Q1X1LQA5PNE2ERHRMTAF04X2RCP1CAXRJTB';
     var VERSION = '&v=20170101';
 
     //Populate the infowindow with Foursquare
     this.populateInfoWindow = function(marker, infowindow) {
-      var url = 'https://api.foursquare.com/v2/venues/' + CLIENT_ID + CLIENT_SECRET + VERSION;
+      var url = 'https://api.foursquare.com/v2/venues/search';
+      //https://foursquare.com/v/ + id
 
       $.ajax({
-        type: "GET",
-        dataType: 'json',
-        cache: false,
         url: url,
-        async: true,
+        dataType: 'json',
+        data: {
+          client_id: CLIENT_ID,
+          client_secret: CLIENT_SECRET,
+          v: VERSION,
+          near: "Wilmington, NC",
+          query: "coffee",
+          async: true
+        },
         success: function(data) {
-          var infoWindow = new google.maps.InfoWindow({
-            content: contentString({
-              title: '<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>',
-              address: data.response.venue.address,
-              city: data.response.venue.city + data.response.venue.state + data.response.venue.zip,
-              hours: data.response.venue.hours,
-              phone: data.response.venue.phone
-            })
-          });
+          console.log(data);
         }
-      })
-    }
+        // success: function(data) {
+        //   var infoWindow = new google.maps.InfoWindow({
+        //     content: contentString({
+        //       title: '<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>',
+        //       address: data.response.venue.address,
+        //       city: data.response.venue.city + data.response.venue.state + data.response.venue.zip,
+        //       hours: data.response.venue.hours,
+        //       phone: data.response.venue.phone
+        //     })
+        //   });
+        // }
+      });
+    };
 
     //Bounces the marker when the marker is clicked
     this.toggleBounce = function(marker) {
