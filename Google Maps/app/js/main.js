@@ -36,8 +36,8 @@ function AppViewModel() {
         },
         {
           location: {
-            lat: 34.242096,
-            lng: -77.863673
+            lat: 34.241756,
+            lng: -77.864541
           }
         },
         {
@@ -119,11 +119,11 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Zola Coffee & Tea',
+      title: 'Café Zola',
       locations: [{
         location: {
-          lat: 34.213228,
-          lng: -77.887951
+          lat: 34.213169,
+          lng: -77.887781
         }
       }],
       showListing: ko.observable(true)
@@ -227,7 +227,7 @@ function AppViewModel() {
     if (isLoadingFinished) {
       console.log("Google maps has finished loading");
       for (var i = 0; i < self.shops().length; i++) {
-        var infowindow = new google.maps.InfoWindow();
+        //var infowindow = new google.maps.InfoWindow();
         var shop = self.shops()[i];
         shop.locations.forEach(function(location) {
           var marker = new google.maps.Marker({
@@ -246,7 +246,6 @@ function AppViewModel() {
               map.panTo(marker.getPosition());
             });
             populateInfoWindow(this, largeInfowindow);
-            infowindow.open(map, this);
           });
         });
       }
@@ -259,6 +258,7 @@ function AppViewModel() {
 
   //Makes the shop list names clickable
   this.listItemClick = function(place) {
+    google.maps.event.trigger(marker.position, 'click')
     console.log(place);
   };
 
@@ -268,8 +268,7 @@ function AppViewModel() {
     location.reload();
   }
 
-  var map,
-    largeInfowindow;
+  var map, largeInfowindow;
   var bounds;
   var markers = [];
 
@@ -332,22 +331,18 @@ function AppViewModel() {
         url: url,
         dataType: 'json',
         data: {
-          limit: '1',
+          //limit: '1',
           ll: latlng,
           client_id: CLIENT_ID,
           client_secret: CLIENT_SECRET,
-          name: 'name',
+          query: "coffee",
+          //name: 'name',
           v: VERSION,
           async: true
         },
         success: function(data) {
-          infowindow.setContent(
-               '<div>' + '<b>' + data.response.venues.name + '</b>' + '</div>' + data.response.venues.formattedAddress + data.response.venues.formattedPhone + data.response.venues.hours + data.response.venues.url
-              // address: data.response.venues.address,
-              // city: data.response.venues.city + data.response.venues.state + data.response.venues.zip,
-              // phone: data.response.venues.phone,
-              // hours: data.response.venues.hours
-          )
+          infowindow.setContent('<div>' + '<b>' + data.response.venues[0].name + '</b>' + '</div>' + data.response.venues[0].location.formattedAddress + data.response.venues[0].formattedPhone + data.response.venues[0].hours + data.response.venues[0].url);
+          infowindow.open(map, marker)
           console.log(data);
         }
       });
