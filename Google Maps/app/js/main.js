@@ -275,7 +275,6 @@ function AppViewModel() {
     largeInfowindow;
   var bounds;
   var markers = [];
-  var infowindow = [];
 
   function initMap() {
 
@@ -321,11 +320,11 @@ function AppViewModel() {
     });
 
     //Setting up Foursquare for infowindow
-    var CLIENT_ID = '?client_id=4TGGE0PWAWXOLLGK4LWQF4C1ZO3UPPR4IIK5U24QOCG0ISIQ';
-    var CLIENT_SECRET = '$client_secret=ZNHCHPVS0NEE0Q1X1LQA5PNE2ERHRMTAF04X2RCP1CAXRJTB';
-    var VERSION = '&v=20170101';
+    var CLIENT_ID = '4TGGE0PWAWXOLLGK4LWQF4C1ZO3UPPR4IIK5U24QOCG0ISIQ';
+    var CLIENT_SECRET = 'ZNHCHPVS0NEE0Q1X1LQA5PNE2ERHRMTAF04X2RCP1CAXRJTB';
+    var VERSION = '20170101';
 
-    //Populate the infowindow with Foursquare
+    //Populate the infowindow with Foursquare\
     this.populateInfoWindow = function(marker, infowindow) {
       var url = 'https://api.foursquare.com/v2/venues/search';
       //https://foursquare.com/v/ + id
@@ -342,6 +341,13 @@ function AppViewModel() {
           async: true
         },
         success: function(data) {
+          var infowindow = new google.maps.InfoWindow({
+            title: '<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>',
+            address: data.response.venue.address,
+            city: data.response.venue.city + data.response.venue.state + data.response.venue.zip,
+            phone: data.response.venue.phone,
+            hours: data.response.venue.hours
+          })
           console.log(data);
         }
         // success: function(data) {
