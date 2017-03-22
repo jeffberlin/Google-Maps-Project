@@ -336,12 +336,12 @@ function AppViewModel() {
           client_id: CLIENT_ID,
           client_secret: CLIENT_SECRET,
           query: "coffee",
-          //name: 'name',
+          name: 'name',
           v: VERSION,
           async: true
         },
         success: function(data) {
-          infowindow.setContent('<div>' + '<b>' + data.response.venues[0].name + '</b>' + '</div>' + data.response.venues[0].location.formattedAddress + data.response.venues[0].formattedPhone + data.response.venues[0].hours + data.response.venues[0].url);
+          infowindow.setContent('<div>' + '<b>' + data.response.venues[0].name + '</b>' + '</div>' + '<div>' + data.response.venues[0].location.formattedAddress + '</div>' + '<div>' + data.response.venues[0].contact.formattedPhone + '</div>');
           infowindow.open(map, marker)
           console.log(data);
         }
