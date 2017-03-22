@@ -17,12 +17,6 @@ function AppViewModel() {
         },
         {
           location: {
-            lat: 34.238930,
-            lng: -77.921174
-          }
-        },
-        {
-          location: {
             lat: 34.237872,
             lng: -77.921174
           }
@@ -136,16 +130,6 @@ function AppViewModel() {
           lng: -77.871677
         },
         foursquareId: '4df39287d4c01ff6b2ecac4d'
-      }],
-      showListing: ko.observable(true)
-    },
-    {
-      title: 'Daily Grind',
-      locations: [{
-        location: {
-          lat: 34.241911,
-          lng: -77.867955
-        }
       }],
       showListing: ko.observable(true)
     },
@@ -308,6 +292,7 @@ function AppViewModel() {
           client_id: CLIENT_ID,
           client_secret: CLIENT_SECRET,
           v: VERSION,
+          query: "Coffee Shops",
           async: true
         },
         success: function(data) {
