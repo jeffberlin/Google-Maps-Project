@@ -3,7 +3,7 @@ var ko = require("knockout")
 var styles = require('./styles').styles
 
 function AppViewModel() {
-  this.header = ko.observable("Wilmington Coffee Shops");
+  this.header = ko.observable("Wilmington's Top Coffee Shops");
 
   // List of coffee shops to select
   var self = this;
@@ -120,10 +120,10 @@ function AppViewModel() {
     },
     {
       title: 'Café Zola',
-      locations: [{
+       locations: [{
         location: {
-          lat: 34.213169,
-          lng: -77.887781
+          lat: 34.213169032735244,
+          lng: -77.88778124872474
         }
       }],
       showListing: ko.observable(true)
@@ -153,18 +153,8 @@ function AppViewModel() {
       title: 'Addicted to the Bean',
       locations: [{
         location: {
-          lat: 34.213678,
-          lng: -77.886954
-        }
-      }],
-      showListing: ko.observable(true)
-    },
-    {
-      title: 'Bitty & Beau\'s Coffee',
-      locations: [{
-        location: {
-          lat: 34.242041,
-          lng: -77.877485
+           lat: 34.21370682100642,
+           lng: -77.88689944479914
         }
       }],
       showListing: ko.observable(true)
@@ -190,31 +180,11 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Morning Glory Coffeehouse',
-      locations: [{
-        location: {
-          lat: 34.225831,
-          lng: -77.929120
-        }
-      }],
-      showListing: ko.observable(true)
-    },
-    {
       title: 'Bespoke Coffee & Dry Goods',
       locations: [{
         location: {
           lat: 34.236453,
           lng: -77.947403
-        }
-      }],
-      showListing: ko.observable(true)
-    },
-    {
-      title: 'Brick + Mortar Coffee and Supply',
-      locations: [{
-        location: {
-          lat: 34.247251,
-          lng: -77.946280
         }
       }],
       showListing: ko.observable(true)
@@ -245,7 +215,7 @@ function AppViewModel() {
             window.setTimeout(function() {
               map.panTo(marker.getPosition());
             });
-            populateInfoWindow(this, largeInfowindow);
+            populateInfoWindow(marker);
           });
         });
       }
@@ -258,7 +228,7 @@ function AppViewModel() {
 
   //Makes the shop list names clickable
   this.listItemClick = function(place) {
-    google.maps.event.trigger(marker.position, 'click')
+    //google.maps.event.trigger(marker.position, 'click')
     console.log(place);
   };
 
@@ -268,7 +238,7 @@ function AppViewModel() {
     location.reload();
   }
 
-  var map, largeInfowindow;
+  var map;
   var bounds;
   var markers = [];
 
@@ -326,6 +296,8 @@ function AppViewModel() {
       //https://foursquare.com/v/ + id
       var latlng = marker.position.lat() + ', ' + marker.position.lng();
       var infowindow = new google.maps.InfoWindow();
+      var streetViewService = new google.maps.StreetViewService();
+      var radius = 50;
 
       $.ajax({
         url: url,
@@ -335,14 +307,12 @@ function AppViewModel() {
           ll: latlng,
           client_id: CLIENT_ID,
           client_secret: CLIENT_SECRET,
-          query: "coffee",
-          name: 'name',
           v: VERSION,
           async: true
         },
         success: function(data) {
-          infowindow.setContent('<div>' + '<b>' + data.response.venues[0].name + '</b>' + '</div>' + '<div>' + data.response.venues[0].location.formattedAddress + '</div>' + '<div>' + data.response.venues[0].contact.formattedPhone + '</div>');
-          infowindow.open(map, marker)
+          infowindow.setContent('<div>' + '<b>' + marker.title + '</b>' + '</div>' + '<div>' + data.response.venues[0].location.address + '</div>' + '<div>' + data.response.venues[0].location.city + ', ' + data.response.venues[0].location.state + ' ' + data.response.venues[0].location.postalCode + '<div>' + data.response.venues[0].contact.formattedPhone);
+          infowindow.open(map, marker);
           console.log(data);
         }
       });
