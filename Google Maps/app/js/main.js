@@ -31,7 +31,8 @@ function AppViewModel() {
           location: {
             lat: 34.201974,
             lng: -77.922590
-          }
+          },
+          foursquareId: '4b5666daf964a520e30e28e3'
         },
         {
           location: {
@@ -43,7 +44,8 @@ function AppViewModel() {
           location: {
             lat: 34.194293,
             lng: -77.910822
-          }
+          },
+          foursquareId: '4b44d599f964a52097fd25e3'
         }
       ],
       showListing: ko.observable(true)
@@ -62,12 +64,6 @@ function AppViewModel() {
             lng: -77.828570
           }
         },
-        {
-          location: {
-            lat: 34.196443,
-            lng: -77.890236
-          }
-        }
       ],
       showListing: ko.observable(true)
     },
@@ -117,7 +113,8 @@ function AppViewModel() {
         location: {
           lat: 34.237704,
           lng: -77.934188
-        }
+        },
+        foursquareId: '4b8b2b0af964a520de9532e3'
       }],
       showListing: ko.observable(true)
     },
@@ -138,7 +135,7 @@ function AppViewModel() {
           lat: 34.212560,
           lng: -77.871677
         },
-        id: '4df39287d4c01ff6b2ecac4d'
+        foursquareId: '4df39287d4c01ff6b2ecac4d'
       }],
       showListing: ko.observable(true)
     },
@@ -324,43 +321,35 @@ function AppViewModel() {
     var CLIENT_SECRET = 'ZNHCHPVS0NEE0Q1X1LQA5PNE2ERHRMTAF04X2RCP1CAXRJTB';
     var VERSION = '20170101';
 
-    //Populate the infowindow with Foursquare\
+    //Populate the infowindow with Foursquare
     this.populateInfoWindow = function(marker, infowindow) {
       var url = 'https://api.foursquare.com/v2/venues/search';
       //https://foursquare.com/v/ + id
+      var latlng = marker.position.lat() + ', ' + marker.position.lng();
+      var infowindow = new google.maps.InfoWindow();
 
       $.ajax({
         url: url,
         dataType: 'json',
         data: {
+          limit: '1',
+          ll: latlng,
           client_id: CLIENT_ID,
           client_secret: CLIENT_SECRET,
+          name: 'name',
           v: VERSION,
-          near: "Wilmington, NC",
-          query: "coffee",
           async: true
         },
         success: function(data) {
-          var infowindow = new google.maps.InfoWindow({
-            title: '<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>',
-            address: data.response.venue.address,
-            city: data.response.venue.city + data.response.venue.state + data.response.venue.zip,
-            phone: data.response.venue.phone,
-            hours: data.response.venue.hours
-          })
+          infowindow.setContent(
+               '<div>' + '<b>' + data.response.venues.name + '</b>' + '</div>' + data.response.venues.formattedAddress + data.response.venues.formattedPhone + data.response.venues.hours + data.response.venues.url
+              // address: data.response.venues.address,
+              // city: data.response.venues.city + data.response.venues.state + data.response.venues.zip,
+              // phone: data.response.venues.phone,
+              // hours: data.response.venues.hours
+          )
           console.log(data);
         }
-        // success: function(data) {
-        //   var infoWindow = new google.maps.InfoWindow({
-        //     content: contentString({
-        //       title: '<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>',
-        //       address: data.response.venue.address,
-        //       city: data.response.venue.city + data.response.venue.state + data.response.venue.zip,
-        //       hours: data.response.venue.hours,
-        //       phone: data.response.venue.phone
-        //     })
-        //   });
-        // }
       });
     };
 
