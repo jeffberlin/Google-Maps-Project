@@ -319,7 +319,7 @@ function AppViewModel() {
             async: true
           },
           success: function(data) {
-            //infowindow.setContent('<div>' + '<b>' + data.response.venues.name + '</b>' + '</div>' + '<div>' + data.response.venues.location.address + '</div>' + '<div>' + data.response.venues.location.city + ', ' + data.response.venues.location.state + ' ' + data.response.venues.location.postalCode + '<div>' + data.response.venues.contact.formattedPhone);
+            infowindow.setContent('<div>' + '<b>' + data.response.venues.name + '</b>' + '</div>' + '<div>' + data.response.venues.location.address + '</div>' + '<div>' + data.response.venues.location.city + ', ' + data.response.venues.location.state + ' ' + data.response.venues.location.postalCode + '<div>' + data.response.venues.contact.formattedPhone);
             infowindow.open(map, marker);
             console.log(data);
           }
