@@ -11,20 +11,22 @@ function AppViewModel() {
       title: 'Port City Java',
       locations: [{
           location: {
-            lat: 34.235912,
-            lng: -77.948826
-          }
+            lat: 34.235833,
+            lng: -77.94879074
+          },
+          foursquareId: '4b49080ff964a520d76226e3'
         },
         {
           location: {
-            lat: 34.237872,
-            lng: -77.921174
-          }
+            lat: 34.23786579468198,
+            lng: -77.9210390200545
+          },
+          foursquareId: '4b448576f964a520f3f525e3'
         },
         {
           location: {
-            lat: 34.201974,
-            lng: -77.922590
+            lat: 34.202138,
+            lng: -77.922557
           },
           foursquareId: '4b5666daf964a520e30e28e3'
         },
@@ -32,7 +34,8 @@ function AppViewModel() {
           location: {
             lat: 34.241756,
             lng: -77.864541
-          }
+          },
+          foursquareId: '4dc43a00091a070849ef35ce'
         },
         {
           location: {
@@ -48,26 +51,29 @@ function AppViewModel() {
       title: 'Starbucks',
       locations: [{
           location: {
-            lat: 34.216803,
-            lng: -77.906956
-          }
+            lat: 34.216882,
+            lng: -77.907073
+          },
+          foursquareId: '5831a6cd5d6ec6451e670ea4'
         },
         {
           location: {
-            lat: 34.242066,
-            lng: -77.828570
-          }
+            lat: 34.242121,
+            lng: -77.828527
+          },
+          foursquareId: '4b4b75cdf964a520989c26e3'
         },
       ],
       showListing: ko.observable(true)
     },
     {
-      title: 'Folks on Fourth',
+      title: 'Folks Cafe',
       locations: [{
         location: {
-          lat: 34.243700,
-          lng: -77.945501
-        }
+          lat: 34.23759258899041,
+          lng: -77.93404361312263
+        },
+        foursquareId: '4b8b2b0af964a520de9532e3'
       }],
       showListing: ko.observable(true)
     },
@@ -75,9 +81,10 @@ function AppViewModel() {
       title: '24 South Coffee House',
       locations: [{
         location: {
-          lat: 34.234496,
-          lng: -77.948725
-        }
+          lat: 34.234456599111056,
+          lng: -77.94852480007482
+        },
+        foursquareId: '53fa55f3498ed31bb942100a'
       }],
       showListing: ko.observable(true)
     },
@@ -85,9 +92,10 @@ function AppViewModel() {
       title: 'Karen\'s Cafe',
       locations: [{
         location: {
-          lat: 34.238730,
-          lng: -77.948981
-        }
+          lat: 34.238785509641104,
+          lng: -77.949138366954
+        },
+        foursquareId: '4f3f1635e4b0545d1625d191'
       }],
       showListing: ko.observable(true)
     },
@@ -95,20 +103,21 @@ function AppViewModel() {
       title: 'Luna Caffè',
       locations: [{
         location: {
-          lat: 34.228263,
-          lng: -77.940812
-        }
+          lat: 34.22825,
+          lng: -77.94081
+        },
+        foursquareId: '523e0915498ef6fde2f97750'
       }],
       showListing: ko.observable(true)
     },
     {
-      title: 'Folks Cafe',
+      title: 'Folks Cafe on Fourth',
       locations: [{
         location: {
-          lat: 34.237704,
-          lng: -77.934188
+          lat: 34.24387096219762,
+          lng: -77.94567445744798
         },
-        foursquareId: '4b8b2b0af964a520de9532e3'
+        foursquareId: '54a896ea498e43a77f97ab37'
       }],
       showListing: ko.observable(true)
     },
@@ -118,7 +127,8 @@ function AppViewModel() {
         location: {
           lat: 34.213169032735244,
           lng: -77.88778124872474
-        }
+        },
+        foursquareId: '56af9467498e98f310f07eb8'
       }],
       showListing: ko.observable(true)
     },
@@ -139,7 +149,8 @@ function AppViewModel() {
         location: {
            lat: 34.21370682100642,
            lng: -77.88689944479914
-        }
+        },
+        foursquareId: '545e3fbe498ed0dddfc678d0'
       }],
       showListing: ko.observable(true)
     },
@@ -149,7 +160,8 @@ function AppViewModel() {
         location: {
           lat: 34.266057,
           lng: -77.837758
-        }
+        },
+        foursquareId: '558ea6c2498e1196c0dde706'
       }],
       showListing: ko.observable(true)
     },
@@ -157,9 +169,10 @@ function AppViewModel() {
       title: 'Java Dog Coffee House',
       locations: [{
         location: {
-          lat: 34.239104,
-          lng: -77.949228
-        }
+          lat: 34.23904245713525,
+          lng: -77.94922761275593
+        },
+        foursquareId: '4b533f58f964a520fb9327e3'
       }],
       showListing: ko.observable(true)
     },
@@ -167,9 +180,10 @@ function AppViewModel() {
       title: 'Bespoke Coffee & Dry Goods',
       locations: [{
         location: {
-          lat: 34.236453,
-          lng: -77.947403
-        }
+          lat: 34.236501,
+          lng: -77.947438
+        },
+        foursquareId: '584d8c2c94c690146a6a4882'
       }],
       showListing: ko.observable(true)
     }
@@ -199,7 +213,9 @@ function AppViewModel() {
             window.setTimeout(function() {
               map.panTo(marker.getPosition());
             });
-            populateInfoWindow(marker);
+            populateInfoWindow(this, largeInfowindow);
+            //infowindow.setContent(contentString)
+            //infowindow.open(map)
           });
         });
       }
@@ -222,7 +238,7 @@ function AppViewModel() {
     location.reload();
   }
 
-  var map;
+  var map, largeInfowindow;
   var bounds;
   var markers = [];
 
@@ -252,7 +268,7 @@ function AppViewModel() {
     this.searchFunction = ko.computed(function() {
       var filterInput = self.search().toLowerCase();
       self.shops().forEach(function(shop) {
-        console.log(shop);
+        //console.log(shop);
         if (shop.title.toLowerCase().indexOf(filterInput) !== -1) {
           // show the location
           shop.showListing(true);
@@ -276,31 +292,38 @@ function AppViewModel() {
 
     //Populate the infowindow with Foursquare
     this.populateInfoWindow = function(marker, infowindow) {
+      
       var url = 'https://api.foursquare.com/v2/venues/search';
-      //https://foursquare.com/v/ + id
       var latlng = marker.position.lat() + ', ' + marker.position.lng();
+      var fsId = location.foursquareId + '?';
       var infowindow = new google.maps.InfoWindow();
-      var streetViewService = new google.maps.StreetViewService();
-      var radius = 50;
-
-      $.ajax({
-        url: url,
-        dataType: 'json',
-        data: {
-          //limit: '1',
-          ll: latlng,
-          client_id: CLIENT_ID,
-          client_secret: CLIENT_SECRET,
-          v: VERSION,
-          query: "Coffee Shops",
-          async: true
-        },
-        success: function(data) {
-          infowindow.setContent('<div>' + '<b>' + marker.title + '</b>' + '</div>' + '<div>' + data.response.venues[0].location.address + '</div>' + '<div>' + data.response.venues[0].location.city + ', ' + data.response.venues[0].location.state + ' ' + data.response.venues[0].location.postalCode + '<div>' + data.response.venues[0].contact.formattedPhone);
-          infowindow.open(map, marker);
-          console.log(data);
-        }
-      });
+      // if (infowindow.marker != marker) {
+      //   infowindow.setContent('');
+      //   infowindow.marker = marker;
+      //   infowindow.addListener('closeclick', function() {
+      //     infowindow.marker = null;
+      //   });
+      // }
+      
+        $.ajax({
+          url: url,
+          dataType: 'json',
+          data: {
+            //limit: '1',
+            ll: latlng,
+            id: fsId,
+            client_id: CLIENT_ID,
+            client_secret: CLIENT_SECRET,
+            v: VERSION,
+            //query: "Coffee Shops",
+            async: true
+          },
+          success: function(data) {
+            //infowindow.setContent('<div>' + '<b>' + data.response.venues.name + '</b>' + '</div>' + '<div>' + data.response.venues.location.address + '</div>' + '<div>' + data.response.venues.location.city + ', ' + data.response.venues.location.state + ' ' + data.response.venues.location.postalCode + '<div>' + data.response.venues.contact.formattedPhone);
+            infowindow.open(map, marker);
+            console.log(data);
+          }
+        });
     };
 
     //Bounces the marker when the marker is clicked
