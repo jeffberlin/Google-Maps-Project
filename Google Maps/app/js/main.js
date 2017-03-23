@@ -203,7 +203,7 @@ function AppViewModel() {
             title: shop.title,
             animation: google.maps.Animation.DROP,
             map: map,
-            id: i
+            id: location.foursquareId
           })
           location.marker = marker;
           bounds.extend(marker.position);
@@ -214,8 +214,6 @@ function AppViewModel() {
               map.panTo(marker.getPosition());
             });
             populateInfoWindow(this, largeInfowindow);
-            //infowindow.setContent(contentString)
-            //infowindow.open(map)
           });
         });
       }
@@ -243,6 +241,8 @@ function AppViewModel() {
   var markers = [];
 
   function initMap() {
+
+    self.infowindow = new google.maps.InfoWindow();
 
     bounds = new google.maps.LatLngBounds();
 
@@ -281,8 +281,8 @@ function AppViewModel() {
           // hide the location
           shop.showListing(false);
           // hide the location's markers
-          if (location.marker !== shop.title) {
-            location.marker.setVisible(false);
+          if (location.marker !== -1) {
+            location.setVisible(false);
           }
           return false;
           // }
@@ -298,25 +298,16 @@ function AppViewModel() {
     //Populate the infowindow with Foursquare
     this.populateInfoWindow = function(marker, infowindow) {
       
-      var url = 'https://api.foursquare.com/v2/venues/search';
-      var latlng = marker.position.lat() + ', ' + marker.position.lng();
-      var fsId = location.foursquareId + '?';
-      var infowindow = new google.maps.InfoWindow();
-      // if (infowindow.marker != marker) {
-      //   infowindow.setContent('');
-      //   infowindow.marker = marker;
-      //   infowindow.addListener('closeclick', function() {
-      //     infowindow.marker = null;
-      //   });
-      // }
+      var url = 'https://api.foursquare.com/v2/venues/' + marker.id;
+      //var latlng = marker.position.lat() + ', ' + marker.position.lng();
+      //var fsId = location.foursquareId + '?';
       
         $.ajax({
           url: url,
           dataType: 'json',
           data: {
-            //limit: '1',
-            ll: latlng,
-            id: fsId,
+            //ll: latlng,
+            id: location.foursquareId,
             client_id: CLIENT_ID,
             client_secret: CLIENT_SECRET,
             v: VERSION,
@@ -324,8 +315,9 @@ function AppViewModel() {
             async: true
           },
           success: function(data) {
-            infowindow.setContent('<div>' + '<b>' + data.response.venues[0].name + '</b>' + '</div>' + '<div>' + data.response.venues[0].location.address + '</div>' + '<div>' + data.response.venues[0].location.city + ', ' + data.response.venues[0].location.state + ' ' + data.response.venues[0].location.postalCode + '<div>' + data.response.venues[0].contact.formattedPhone);
-            infowindow.open(map, marker);
+            //var venue = data.response.venue;
+            self.infowindow.setContent('<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>' + '<div>' + data.response.venue.location.address + '</div>' + '<div>' + data.response.venue.location.city + ', ' + data.response.venue.location.state + ' ' + data.response.venue.location.postalCode + '<div>' + data.response.venue.contact.formattedPhone);
+            self.infowindow.open(map, marker);
             console.log(data);
           }
         });
