@@ -273,14 +273,19 @@ function AppViewModel() {
           // show the location
           shop.showListing(true);
           // show the location's markers
-          // if (typeof location.marker === 'object') {
-          //   location.marker.visible(match);
-          //   return match;
-          // }
+          if (typeof location.marker === shop.title) {
+            location.marker.setVisible(true);
+          }
+          return true;
         } else {
           // hide the location
           shop.showListing(false);
           // hide the location's markers
+          if (location.marker !== shop.title) {
+            location.marker.setVisible(false);
+          }
+          return false;
+          // }
         }
       });
     });
@@ -319,7 +324,7 @@ function AppViewModel() {
             async: true
           },
           success: function(data) {
-            infowindow.setContent('<div>' + '<b>' + data.response.venues.name + '</b>' + '</div>' + '<div>' + data.response.venues.location.address + '</div>' + '<div>' + data.response.venues.location.city + ', ' + data.response.venues.location.state + ' ' + data.response.venues.location.postalCode + '<div>' + data.response.venues.contact.formattedPhone);
+            infowindow.setContent('<div>' + '<b>' + data.response.venues[0].name + '</b>' + '</div>' + '<div>' + data.response.venues[0].location.address + '</div>' + '<div>' + data.response.venues[0].location.city + ', ' + data.response.venues[0].location.state + ' ' + data.response.venues[0].location.postalCode + '<div>' + data.response.venues[0].contact.formattedPhone);
             infowindow.open(map, marker);
             console.log(data);
           }
