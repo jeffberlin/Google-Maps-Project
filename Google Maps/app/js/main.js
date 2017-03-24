@@ -206,6 +206,7 @@ function AppViewModel() {
             id: location.foursquareId
           })
           location.marker = marker;
+          shop.marker = marker;
           bounds.extend(marker.position);
           marker.addListener('click', function() {
             toggleBounce(marker);
@@ -273,19 +274,14 @@ function AppViewModel() {
           // show the location
           shop.showListing(true);
           // show the location's markers
-          if (typeof location.marker === shop.title) {
-            location.marker.setVisible(true);
-          }
+          shop.marker.setVisible(true);
           return true;
         } else {
           // hide the location
           shop.showListing(false);
           // hide the location's markers
-          if (location.marker !== -1) {
-            location.setVisible(false);
-          }
+          shop.marker.setVisible(false);
           return false;
-          // }
         }
       });
     });
