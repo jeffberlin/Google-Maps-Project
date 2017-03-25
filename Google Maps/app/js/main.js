@@ -74,6 +74,13 @@ function AppViewModel() {
           lng: -77.93404361312263
         },
         foursquareId: '4b8b2b0af964a520de9532e3'
+      },
+      {
+        location: {
+          lat: 34.24387096219762,
+          lng: -77.94567445744798
+        },
+        foursquareId: '54a896ea498e43a77f97ab37'
       }],
       showListing: ko.observable(true)
     },
@@ -111,13 +118,13 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Folks Cafe on Fourth',
+      title: 'Holy Grounds',
       locations: [{
         location: {
-          lat: 34.24387096219762,
-          lng: -77.94567445744798
+          lat: 34.18645398918267,
+          lng: -77.9310255259374
         },
-        foursquareId: '54a896ea498e43a77f97ab37'
+        foursquareId: '4b5f4006f964a52000b029e3'
       }],
       showListing: ko.observable(true)
     },
@@ -186,6 +193,17 @@ function AppViewModel() {
         foursquareId: '584d8c2c94c690146a6a4882'
       }],
       showListing: ko.observable(true)
+    },
+    {
+      title: 'Bitty & Beau\'s Coffee',
+      locations: [{
+        location: {
+          lat: 34.242016,
+          lng: -77.877714
+        },
+        foursquareId: '5787b9a1498eaca60c912293'
+      }],
+      showListing: ko.observable(true)
     }
   ]);
 
@@ -195,7 +213,6 @@ function AppViewModel() {
     if (isLoadingFinished) {
       console.log("Google maps has finished loading");
       for (var i = 0; i < self.shops().length; i++) {
-        //var infowindow = new google.maps.InfoWindow();
         var shop = self.shops()[i];
         shop.locations.forEach(function(location) {
           var marker = new google.maps.Marker({
@@ -225,11 +242,11 @@ function AppViewModel() {
   
   this.search = ko.observable("");
 
-  //Makes the shop list names clickable
-  this.listItemClick = function(place) {
-    //google.maps.event.trigger(marker.position, 'click')
-    console.log(place);
-  };
+  //Makes the shops list clickable
+  this.listItemClick = function(shop) {
+    google.maps.event.trigger(shop.marker, 'click')
+    console.log(shop);
+  }
 
   //Reset button
   document.getElementById('reset').addEventListener('click', resetMap);
@@ -269,19 +286,23 @@ function AppViewModel() {
     this.searchFunction = ko.computed(function() {
       var filterInput = self.search().toLowerCase();
       self.shops().forEach(function(shop) {
-        //console.log(shop);
         if (shop.title.toLowerCase().indexOf(filterInput) !== -1) {
           // show the location
           shop.showListing(true);
           // show the location's markers
-          shop.marker.setVisible(true);
-          return true;
+          shop.locations.forEach(function(shopLocation) {
+            shopLocation.marker.setVisible(true)
+            return true;
+          })
+          
         } else {
           // hide the location
           shop.showListing(false);
           // hide the location's markers
-          shop.marker.setVisible(false);
-          return false;
+          shop.locations.forEach(function(shopLocation) {
+            shopLocation.marker.setVisible(false)
+            return false;
+          })
         }
       });
     });
@@ -295,24 +316,19 @@ function AppViewModel() {
     this.populateInfoWindow = function(marker, infowindow) {
       
       var url = 'https://api.foursquare.com/v2/venues/' + marker.id;
-      //var latlng = marker.position.lat() + ', ' + marker.position.lng();
-      //var fsId = location.foursquareId + '?';
       
         $.ajax({
           url: url,
           dataType: 'json',
           data: {
-            //ll: latlng,
             id: location.foursquareId,
             client_id: CLIENT_ID,
             client_secret: CLIENT_SECRET,
             v: VERSION,
-            //query: "Coffee Shops",
             async: true
           },
           success: function(data) {
-            //var venue = data.response.venue;
-            self.infowindow.setContent('<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>' + '<div>' + data.response.venue.location.address + '</div>' + '<div>' + data.response.venue.location.city + ', ' + data.response.venue.location.state + ' ' + data.response.venue.location.postalCode + '<div>' + data.response.venue.contact.formattedPhone);
+            self.infowindow.setContent('<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>' + '<div>' + data.response.venue.location.address + '</div>' + '<div>' + data.response.venue.location.city + ', ' + data.response.venue.location.state + ' ' + data.response.venue.location.postalCode + '<div>' + data.response.venue.contact.formattedPhone + data.response.venue.rating);
             self.infowindow.open(map, marker);
             console.log(data);
           }
@@ -329,6 +345,10 @@ function AppViewModel() {
           marker.setAnimation(null);
         }, 1200);
       }
+    }
+
+    function googleError() {
+      alert("Google Maps Could Not Be Loaded");
     }
 
   }
