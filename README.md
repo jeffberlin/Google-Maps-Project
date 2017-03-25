@@ -13,3 +13,10 @@ After the first time you set up webpack-dev-server and get the localhost:8080 pa
 * Then type "webpack-dev-server" in the terminal and press 'Enter'
 * You should see the terminal load and activate the server which the last line should read, "webpack: bundle is now VALID."
 * Then reload the browser with localhost:8080
+##
+### Contributors:
+* Karol David
+* Ryan Vrba
+* Foursquare
+* StackOverflow
+* Udacity Forums
