@@ -328,10 +328,20 @@ function AppViewModel() {
             async: true
           },
           success: function(data) {
-            self.infowindow.setContent('<div>' + '<b>' + data.response.venue.name + '</b>' + '</div>' + '<div>' + data.response.venue.location.address + '</div>' + '<div>' + data.response.venue.location.city + ', ' + data.response.venue.location.state + ' ' + data.response.venue.location.postalCode + '<div>' + data.response.venue.contact.formattedPhone + data.response.venue.rating);
+            var venue = data.response.venue.name;
+            var address = data.response.venue.location.address ? data.response.venue.location.address : " ";
+            var city = data.response.venue.location.city ? data.response.venue.location.city : " ";
+            var state = data.response.venue.location.state ? data.response.venue.location.state : " ";
+            var zipCode = data.response.venue.location.postalCode ? data.response.venue.location.postalCode : " ";
+            var phone = data.response.venue.contact.formattedPhone ? data.response.venue.contact.formattedPhone : " ";
+
+            self.infowindow.setContent('<div>' + '<b>' + venue + '</b>' + '</div>' + '<div>' + address + '</div>' + '<div>' + city + ', ' + state + ' ' + zipCode + '<div>' + phone);
             self.infowindow.open(map, marker);
             console.log(data);
           }
+        }).fail(function (e) {
+          self.infowindow.setContent('<div><h4>Well this is embarrassing...</h4></div>' + '<div><h4>Foursquare could not be loaded.</h4></div>');
+          self.infowindow.open(map, marker)
         });
     };
 
@@ -356,3 +366,4 @@ function AppViewModel() {
 }
 var appViewModel = new AppViewModel();
 ko.applyBindings(appViewModel);
+
