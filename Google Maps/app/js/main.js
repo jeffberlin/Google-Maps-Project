@@ -2,206 +2,135 @@ var ko = require("knockout")
 
 var styles = require('./styles').styles
 
+function googleError() {
+  alert("Google maps could not be loaded")
+}
+
 function AppViewModel() {
-  this.header = ko.observable("Wilmington's Top Coffee Shops");
+  this.header = ko.observable("Wilmington's Top Breweries");
 
   // List of coffee shops to select
   var self = this;
   self.shops = ko.observableArray([{
-      title: 'Port City Java',
+      title: 'Front Street Brewery',
       locations: [{
           location: {
-            lat: 34.235833,
-            lng: -77.94879074
+            lat: 34.235740679540505,
+            lng: -77.94877022724364
           },
-          foursquareId: '4b49080ff964a520d76226e3'
-        },
-        {
-          location: {
-            lat: 34.23786579468198,
-            lng: -77.9210390200545
-          },
-          foursquareId: '4b448576f964a520f3f525e3'
-        },
-        {
-          location: {
-            lat: 34.202138,
-            lng: -77.922557
-          },
-          foursquareId: '4b5666daf964a520e30e28e3'
-        },
-        {
-          location: {
-            lat: 34.241756,
-            lng: -77.864541
-          },
-          foursquareId: '4dc43a00091a070849ef35ce'
-        },
-        {
-          location: {
-            lat: 34.194293,
-            lng: -77.910822
-          },
-          foursquareId: '4b44d599f964a52097fd25e3'
-        }
-      ],
-      showListing: ko.observable(true)
-    },
-    {
-      title: 'Starbucks',
-      locations: [{
-          location: {
-            lat: 34.216882,
-            lng: -77.907073
-          },
-          foursquareId: '5831a6cd5d6ec6451e670ea4'
-        },
-        {
-          location: {
-            lat: 34.242121,
-            lng: -77.828527
-          },
-          foursquareId: '4b4b75cdf964a520989c26e3'
+          foursquareId: '4b44d7daf964a520e3fd25e3'
         },
       ],
       showListing: ko.observable(true)
     },
     {
-      title: 'Folks Cafe',
+      title: 'Wilmington Brewing Co.',
+      locations: [{
+          location: {
+            lat: 34.22136150569059,
+            lng: -77.8866036482147
+          },
+          foursquareId: '53cef136498edd62f5f091fd'
+        },
+      ],
+      showListing: ko.observable(true)
+    },
+    {
+      title: 'Flytrap Brewing',
       locations: [{
         location: {
-          lat: 34.23759258899041,
-          lng: -77.93404361312263
+          lat: 34.24033086673391,
+          lng: -77.94535875320435
         },
-        foursquareId: '4b8b2b0af964a520de9532e3'
-      },
-      {
-        location: {
-          lat: 34.24387096219762,
-          lng: -77.94567445744798
-        },
-        foursquareId: '54a896ea498e43a77f97ab37'
+        foursquareId: '529e9bf311d266d68f5626c1'
       }],
       showListing: ko.observable(true)
     },
     {
-      title: '24 South Coffee House',
+      title: 'Waterline Brewing Co.',
       locations: [{
         location: {
-          lat: 34.234456599111056,
-          lng: -77.94852480007482
+          lat: 34.22557767994479,
+          lng: -77.9486084684903
         },
-        foursquareId: '53fa55f3498ed31bb942100a'
+        foursquareId: '55f70a5f498e324dc4109320'
       }],
       showListing: ko.observable(true)
     },
     {
-      title: 'Karen\'s Cafe',
+      title: 'Broomtail Craft Brewery',
       locations: [{
         location: {
-          lat: 34.238785509641104,
-          lng: -77.949138366954
+          lat: 34.25873666153001,
+          lng: -77.84888581241525
         },
-        foursquareId: '4f3f1635e4b0545d1625d191'
+        foursquareId: '536e6958498ea2c77d5524d1'
       }],
       showListing: ko.observable(true)
     },
     {
-      title: 'Luna Caffè',
+      title: 'Ironclad Brewery',
       locations: [{
         location: {
-          lat: 34.22825,
-          lng: -77.94081
+          lat: 34.23700035437736,
+          lng: -77.94772982597351
         },
-        foursquareId: '523e0915498ef6fde2f97750'
+        foursquareId: '53dbd858498e33be781da324'
       }],
       showListing: ko.observable(true)
     },
     {
-      title: 'Holy Grounds',
-      locations: [{
-        location: {
-          lat: 34.18645398918267,
-          lng: -77.9310255259374
-        },
-        foursquareId: '4b5f4006f964a52000b029e3'
-      }],
-      showListing: ko.observable(true)
-    },
-    {
-      title: 'Café Zola',
+      title: 'Prestige Brewing',
        locations: [{
         location: {
-          lat: 34.213169032735244,
-          lng: -77.88778124872474
+          lat: 34.2285269,
+          lng: -77.94180949999998
         },
-        foursquareId: '56af9467498e98f310f07eb8'
+        foursquareId: '589ff18abbec664e9ec4cc33'
       }],
       showListing: ko.observable(true)
     },
     {
-      title: 'Grinders Cafè',
+      title: 'Bill\'s Front Porch',
       locations: [{
         location: {
-          lat: 34.212560,
-          lng: -77.871677
+          lat: 34.242523,
+          lng: -77.89038
         },
-        foursquareId: '4df39287d4c01ff6b2ecac4d'
+        foursquareId: '57771d18498e0572191a418e'
       }],
       showListing: ko.observable(true)
     },
     {
-      title: 'Addicted to the Bean',
+      title: 'New Anthem Brewing',
       locations: [{
         location: {
-           lat: 34.21370682100642,
-           lng: -77.88689944479914
+          lat: 34.234121,
+          lng: -77.947813
         },
-        foursquareId: '545e3fbe498ed0dddfc678d0'
+        foursquareId: '5802c2a838fa4fc40ee7a5f2'
       }],
       showListing: ko.observable(true)
     },
     {
-      title: 'Lucky Joe Craft Coffee',
+      title: 'Wrightsville Beach Brewery',
       locations: [{
         location: {
-          lat: 34.266057,
-          lng: -77.837758
+          lat: 34.21091491606973,
+          lng: -77.83721208572388
         },
-        foursquareId: '558ea6c2498e1196c0dde706'
+        foursquareId: '587c099c469aef4ebffcb066'
       }],
       showListing: ko.observable(true)
     },
     {
-      title: 'Java Dog Coffee House',
+      title: 'Good Hops Brewing',
       locations: [{
         location: {
-          lat: 34.23904245713525,
-          lng: -77.94922761275593
+           lat: 34.04202182516429,
+           lng: -77.9048410762307
         },
-        foursquareId: '4b533f58f964a520fb9327e3'
-      }],
-      showListing: ko.observable(true)
-    },
-    {
-      title: 'Bespoke Coffee & Dry Goods',
-      locations: [{
-        location: {
-          lat: 34.236501,
-          lng: -77.947438
-        },
-        foursquareId: '584d8c2c94c690146a6a4882'
-      }],
-      showListing: ko.observable(true)
-    },
-    {
-      title: 'Bitty & Beau\'s Coffee',
-      locations: [{
-        location: {
-          lat: 34.242016,
-          lng: -77.877714
-        },
-        foursquareId: '5787b9a1498eaca60c912293'
+        foursquareId: '5363bcde498e17304bd2234b'
       }],
       showListing: ko.observable(true)
     }
@@ -357,13 +286,8 @@ function AppViewModel() {
       }
     }
 
-    function googleError() {
-      alert("Google Maps Could Not Be Loaded");
-    }
-
   }
   window.initMap = initMap;
 }
 var appViewModel = new AppViewModel();
 ko.applyBindings(appViewModel);
-
