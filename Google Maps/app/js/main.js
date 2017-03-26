@@ -1,9 +1,9 @@
-var ko = require("knockout")
+var ko = require('knockout');
 
-var styles = require('./styles').styles
+var styles = require('./styles').styles;
 
 function googleError() {
-  alert("Google maps could not be loaded")
+  alert("Google maps could not be loaded");
 }
 
 function AppViewModel() {
@@ -12,7 +12,7 @@ function AppViewModel() {
   // List of coffee shops to select
   var self = this;
   self.shops = ko.observableArray([{
-      title: 'Front Street Brewery',
+      title: "Front Street Brewery",
       locations: [{
           location: {
             lat: 34.235740679540505,
@@ -24,7 +24,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Wilmington Brewing Co.',
+      title: "Wilmington Brewing Co.",
       locations: [{
           location: {
             lat: 34.22136150569059,
@@ -36,7 +36,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Flytrap Brewing',
+      title: "Flytrap Brewing",
       locations: [{
         location: {
           lat: 34.24033086673391,
@@ -47,7 +47,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Waterline Brewing Co.',
+      title: "Waterline Brewing Co.",
       locations: [{
         location: {
           lat: 34.22557767994479,
@@ -58,7 +58,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Broomtail Craft Brewery',
+      title: "Broomtail Craft Brewery",
       locations: [{
         location: {
           lat: 34.25873666153001,
@@ -69,7 +69,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Ironclad Brewery',
+      title: "Ironclad Brewery",
       locations: [{
         location: {
           lat: 34.23700035437736,
@@ -80,7 +80,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Prestige Brewing',
+      title: "Prestige Brewing",
        locations: [{
         location: {
           lat: 34.2285269,
@@ -91,7 +91,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Bill\'s Front Porch',
+      title: "Bill\'s Front Porch",
       locations: [{
         location: {
           lat: 34.242523,
@@ -102,7 +102,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'New Anthem Brewing',
+      title: "New Anthem Brewing",
       locations: [{
         location: {
           lat: 34.234121,
@@ -113,7 +113,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Wrightsville Beach Brewery',
+      title: "Wrightsville Beach Brewery",
       locations: [{
         location: {
           lat: 34.21091491606973,
@@ -124,7 +124,7 @@ function AppViewModel() {
       showListing: ko.observable(true)
     },
     {
-      title: 'Good Hops Brewing',
+      title: "Good Hops Brewing",
       locations: [{
         location: {
            lat: 34.04202182516429,
@@ -150,7 +150,7 @@ function AppViewModel() {
             animation: google.maps.Animation.DROP,
             map: map,
             id: location.foursquareId
-          })
+          });
           location.marker = marker;
           shop.marker = marker;
           bounds.extend(marker.position);
@@ -169,13 +169,13 @@ function AppViewModel() {
     }
   });
   
-  this.search = ko.observable("");
+  this.search = ko.observable('');
 
   //Makes the shops list clickable
   this.listItemClick = function(shop) {
-    google.maps.event.trigger(shop.marker, 'click')
+    google.maps.event.trigger(shop.marker, 'click');
     console.log(shop);
-  }
+  };
 
   //Reset button
   document.getElementById('reset').addEventListener('click', resetMap);
@@ -206,10 +206,8 @@ function AppViewModel() {
     appViewModel.google(true);
 
     //Keep the map centered on window resizing
-    google.maps.event.addDomListener(window, "resize", function() {
-      var center = map.getCenter();
-      google.maps.event.trigger(map, "resize");
-      map.setCenter(center);
+    google.maps.event.addDomListener(window, 'resize', function() {
+      map.fitBounds(bounds);
     });
 
     this.searchFunction = ko.computed(function() {
@@ -220,18 +218,17 @@ function AppViewModel() {
           shop.showListing(true);
           // show the location's markers
           shop.locations.forEach(function(shopLocation) {
-            shopLocation.marker.setVisible(true)
+            shopLocation.marker.setVisible(true);
             return true;
-          })
-          
+          });
         } else {
           // hide the location
           shop.showListing(false);
           // hide the location's markers
           shop.locations.forEach(function(shopLocation) {
-            shopLocation.marker.setVisible(false)
+            shopLocation.marker.setVisible(false);
             return false;
-          })
+          });
         }
       });
     });
@@ -270,7 +267,7 @@ function AppViewModel() {
           }
         }).fail(function (e) {
           self.infowindow.setContent('<div><h4>Well this is embarrassing...</h4></div>' + '<div><h4>Foursquare could not be loaded.</h4></div>');
-          self.infowindow.open(map, marker)
+          self.infowindow.open(map, marker);
         });
     };
 
@@ -284,7 +281,7 @@ function AppViewModel() {
           marker.setAnimation(null);
         }, 1200);
       }
-    }
+    };
 
   }
   window.initMap = initMap;
