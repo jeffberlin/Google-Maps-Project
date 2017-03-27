@@ -198,7 +198,7 @@ function AppViewModel() {
         lat: 34.2257,
         lng: -77.9447
       },
-      zoom: 13,
+      zoom: 12,
       styles: styles,
       mapTypeConrtol: false
     });
