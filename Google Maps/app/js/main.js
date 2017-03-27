@@ -2,10 +2,6 @@ var ko = require('knockout');
 
 var styles = require('./styles').styles;
 
-function googleError() {
-  alert("Google maps could not be loaded");
-}
-
 function AppViewModel() {
   this.header = ko.observable("Wilmington's Top Breweries");
 
@@ -177,9 +173,7 @@ function AppViewModel() {
     console.log(shop);
   };
 
-  //Reset button
-  document.getElementById('reset').addEventListener('click', resetMap);
-  function resetMap() {
+  this.resetMap = function() {
     location.reload();
   }
 
@@ -279,12 +273,13 @@ function AppViewModel() {
         marker.setAnimation(google.maps.Animation.BOUNCE);
         setTimeout(function() {
           marker.setAnimation(null);
-        }, 1200);
+        }, 1400);
       }
     };
 
   }
   window.initMap = initMap;
+
 }
 var appViewModel = new AppViewModel();
 ko.applyBindings(appViewModel);
