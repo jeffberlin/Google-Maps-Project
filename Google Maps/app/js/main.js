@@ -175,7 +175,7 @@ function AppViewModel() {
 
   this.resetMap = function() {
     location.reload();
-  }
+  };
 
   var map, largeInfowindow;
   var bounds;
