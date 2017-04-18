@@ -3,7 +3,7 @@ var ko = require('knockout');
 var styles = require('./styles').styles;
 
 function AppViewModel() {
-  this.header = ko.observable("Wilmington's Top Breweries");
+  this.header = ko.observable("Wilmington's Breweries");
 
   // List of coffee shops to select
   var self = this;
