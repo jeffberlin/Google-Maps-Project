@@ -1,4 +1,4 @@
-var ko = require('knockout');
+lvar ko = require('knockout');
 
 var styles = require('./styles').styles;
 
@@ -192,7 +192,6 @@ function AppViewModel() {
         lat: 34.2257,
         lng: -77.9447
       },
-      zoom: 12,
       styles: styles,
       mapTypeConrtol: false
     });
@@ -246,7 +245,7 @@ function AppViewModel() {
             client_secret: CLIENT_SECRET,
             v: VERSION,
             async: true
-          },
+          },()
           success: function(data) {
             var venue = data.response.venue.name;
             var address = data.response.venue.location.address ? data.response.venue.location.address : " ";
