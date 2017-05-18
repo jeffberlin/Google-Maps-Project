@@ -1,5 +1,5 @@
 # Google-Maps-Project
-![ScreenShot](Google Maps/app/Wilmington Brewers copy.png)
+![ScreenShot](screenshot.png)
 ## How to run the content:
 * Download the GitHub .zip files
 * Open the terminal and type `npm install` and press "Enter"
